@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ComplexModels.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -8,9 +9,12 @@ namespace ComplexModels.Controllers
 {
     public class HomeController : Controller
     {
+        BookContext db = new BookContext();
+
         public ActionResult Index()
         {
-            return View();
+            var author = db.Authors.Include("Books").First();
+            return View(author);
         }        
     }
 }
